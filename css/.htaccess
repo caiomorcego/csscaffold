@@ -1,0 +1,9 @@
+<IfModule mod_deflate.c>
+	SetOutputFilter DEFLATE
+</IfModule>
+<IfModule mod_rewrite.c> 
+	RewriteEngine	on
+	RewriteCond		%{REQUEST_FILENAME}		-f
+	RewriteCond 	%{REQUEST_URI}		\.css$
+	RewriteRule 	^(.+)$ 				css-cacheer.php?cssc_request=%{REQUEST_URI}&%{QUERY_STRING}
+</IfModule>
