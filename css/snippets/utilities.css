@@ -1,6 +1,5 @@
-	/* @group General classes */
-	/* General Classes
-	-------------------------------------------------------------- */
+/* @group General Classes */
+/* -------------------------------------------------------------- */
 	
 	.small      { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
 	.large      { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
@@ -16,12 +15,12 @@
 	.last       { margin-right:0; padding-right:0; }
 	.top        { margin-top:0; padding-top:0; }
 	.bottom     { margin-bottom:0; padding-bottom:0; }
-
-	/* @end */
 	
-	/* @group Layout Utilities */
-	/* Layout Utilities
-	---------------------------------------------------------------- */
+
+
+/* @end */
+/* @group Layout Utilities */
+/* ---------------------------------------------------------------- */
 
 	.clear 			{ overflow:hidden; }
 	.clearfix:after 	{ content:"."; display:block; height:0; clear:both; visibility:hidden; }
@@ -30,16 +29,24 @@
 	Any div that is used for layout, should have a 'column' class.
 	*/
 	
-	.column 		{ float:left; margin: 0 18px 18px 0; text-align: center; opacity:0.7; background: lightblue; }
+	.column 		{ float:left; margin: 0 18px 18px 0; }
 	.ie6 .column 	{ overflow:hidden; display:inline; }
 	
+	/* For column classes when testing */
+	.wireframe		{ text-align: center; opacity:0.7; background: lightblue; }
+	
 	.container		{ width: grid(maxcol); margin: 0 auto; overflow: hidden; position: relative; }
+	.showgrid		{ background: url('/images/backgrounds/grid.png'); }
 	
 	.column:last-child,
 	.column:only-child
 	.last 			{ margin-right: 0; }	
 	
-	/* @end */	
+	
+	
+/* @end */	
+/* @group Image Replacement */
+/* ---------------------------------------------------------------- */
 	
 	.image-replaced
 	{
@@ -48,4 +55,6 @@
 		background:no-repeat 0 0;
 		overflow:hidden;
 	}
+	
+/* @end */
 	

@@ -42,7 +42,7 @@
 		For content styling (ie. Blog posts), use the styles inside content.css
 	
 		
-	Grid: i
+	Grid: 
 		
 		966px wide
 		23px columns
@@ -57,10 +57,11 @@
 		column-count:24;
 		keep-settings:no;
 		format:newline;
-		generate-path:'/css/sections/'; 
+		generate-path:'/css/generated/'; 
 		baseline:18;
 	}
 	
+	/* These work like settings */
 	@constants {
 		textColor:#222;
 		fontSize:13px;
@@ -76,8 +77,8 @@
 	
 	// Layout
 	@server import url('sections/layout.css');
-	@server import url('sections/grid.css');
 	@server import url('sections/navigation.css');
+	@server import url('generated/grid.css');
 	
 	// Forms
 	@server import url('sections/forms.css');

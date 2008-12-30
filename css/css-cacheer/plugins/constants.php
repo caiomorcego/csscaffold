@@ -7,7 +7,7 @@ if (!defined('CSS_CACHEER')) { header('Location:/'); }
 $plugin_class = 'ConstantsPlugin';
 class ConstantsPlugin extends CacheerPlugin
 {
-	function pre_process($css)
+	function process($css)
 	{
 		$constants = array();
 		if (preg_match_all('#@constants\s*\{\s*([^\}]+)\s*\}\s*#i', $css, $matches))

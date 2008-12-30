@@ -68,7 +68,7 @@ class GridCSS
 		$s .= $pullselectors . "{ float:left; position:relative; }\n\n";
 		
 		// Open the file relative to /css/
-		$file = fopen("sections/grid.css", "w") or die("Can't open the file");
+		$file = fopen($_SERVER['DOCUMENT_ROOT']."/".$settings['generate-path']."/grid.css", "w") or die("Can't open the file");
 		
 		// Write the string to the file
 		chmod($file, 777);
@@ -285,6 +285,10 @@ class GridCSS
 		{
 			// Strip the name and leave the value so the value can be anything
 			$result = preg_replace('/'.$name.'|\:|\;| /', '', $matches[0][0]);
+			
+			// Remove quotes
+			$result = preg_replace('/\'|\"/', '', $result);
+			
 			return $result;
 		}
 	}
