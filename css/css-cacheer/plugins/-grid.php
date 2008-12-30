@@ -32,6 +32,7 @@ class GridCSS
 		{
 			$settings['format'] = "newline";
 		}	
+		
 	}
 	
 	public function generateGrid($css)
@@ -70,6 +71,7 @@ class GridCSS
 		$file = fopen("sections/grid.css", "w") or die("Can't open the file");
 		
 		// Write the string to the file
+		chmod($file, 777);
 		fwrite($file, $s);
 		fclose($file);
 	}
@@ -287,6 +289,12 @@ class GridCSS
 		}
 	}
 	
+	public function removeSettings($css)
+	{
+		$css = preg_replace('/\@grid\s*\{.*?\}/sx', '', $css);
+		return $css;
+	}
+	
 	private function replaceGutters($css)
 	{
 		global $settings;
@@ -307,16 +315,22 @@ class GridCSS
 	{	
 		global $settings;
 		
-		if (preg_match_all('/grid\(\d+col\)/', $css, $matches))
+		if (preg_match_all('/grid\((.+)col\)/', $css, $matches))
 		{
-			foreach ($matches[0] as $key => $value)
+			foreach ($matches[1] as $key => $number)
 			{
-				$number = str_replace(' ', '', $value);
-				$number = str_replace('grid(', '', $number);
-				$number = str_replace('col)', '', $number);
-				$colw = ($number * $settings['columnwidth']) - $settings['gutterwidth'];
-				$colw   = $colw.'px/*grid('.$number.')*/';
-				$css = str_replace($value,$colw,$css);
+				if($number=="max") 
+				{
+					$number = $settings['columncount'];
+				} 
+				
+				$colw = ($number * $settings['columnwidth']) - $settings['gutterwidth'] .'px';
+				
+				if($settings['keep-settings'] == "yes"){
+					$colw   = $colw.'/*grid('.$number.')*/';
+				}
+				
+				$css = str_replace($matches[0][$key],$colw,$css);
 			}
 		}
 		return $css;
