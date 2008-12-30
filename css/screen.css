@@ -52,11 +52,8 @@
 -----------------------------------------------------------------------------*/
 
 /* @group Imports */
-
-	@server import url("snippets/reset.css");
-	@server import url("snippets/development.css");
-	@server import url("areas/forms.css");
-	@server import url("areas/content.css");
+	 
+@server import url('sections/grid.css');
 
 /* @end */
 
@@ -68,7 +65,8 @@
 		column-count:24;
 		keep-settings:no;
 		format:newline;
-		generate-path: '/css/areas/'; 
+		generate-path: '/css/sections/'; 
+		baseline:18;
 	}
 	
 	@constants {
@@ -110,12 +108,17 @@
 	{ 
 		font: 3em/1 "Helvetica Neue", Helvetica, Arial, sans-serif;  
 		margin-bottom: 0.5em; 
+	
+		image-replace:url('/images/image-replacement/h1.png'); 
+
 	}
 	
 	h2 
 	{
 	 	font: 2em/1; 
 	 	margin-bottom: 0.75em; 
+	
+		image-replace:url('/images/image-replacement/h2.png'); 
 	}
 	
 	h3 
@@ -297,7 +300,7 @@
 
 	
 	.container,
-	#page		 	{ width: grid(24col); margin: 0 auto; position:relative; overflow: hidden;background: url('/images/grid-966.png'); }	
+	#page		 	{ width: grid(24col); margin: 0 auto; position:relative; overflow: hidden;background: url('/images/backgrounds/grid.png'); }	
 	
 	#header		{ columns:24!; height: 108px; }
 	#footer		{ columns:24!; height: 108px; margin: 0; }

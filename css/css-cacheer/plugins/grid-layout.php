@@ -21,6 +21,9 @@ class Grid extends CacheerPlugin
 		// Generate the grid.css
 		$grid -> generateGrid($css);
 		
+		// Generate the grid.png
+		$grid -> generateGridImage($css);
+		
 		// Send the parsed css back to cacheer
 		return $css;
 	}

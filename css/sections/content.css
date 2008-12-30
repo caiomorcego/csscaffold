@@ -1,0 +1,36 @@
+/* @group Content  *//* -----------------------------------------------------
+
+	Content Styling
+	
+	Use these styles to form content, like blog posts, with classes.
+
+---------------------------------------------------------------------------*/
+	
+	/*
+	
+	<div class="pic span-4 left .pull-4">
+		<img src="image.jpg" />
+		<p>Caption goes here.</p>
+	</div>
+
+	or
+	
+	<img src="image.jpg" class="pic four left frame solo"/>
+	
+	*/
+	
+	.right 		{ float: right; margin: 1.5em 0 1.5em 1.5em; }
+	.left 			{ float: left; margin: 1.5em 1.5em 1.5em 0; }
+	.solo	 		{ margin-bottom: 1.5em; }
+	
+	.pic p, .caption {
+		font-size: 11px;
+		line-height: 15px;
+		color: #666;
+		margin: 4px 0 10px;
+	}
+	
+	.frame 		{ border: 1px solid #999; }
+	
+
+

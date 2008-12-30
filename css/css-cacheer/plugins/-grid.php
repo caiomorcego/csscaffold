@@ -11,6 +11,7 @@ class GridCSS
 		$settings['columncount'] 	= 	$this -> getParam('column-count', $css);
 		$settings['columnwidth']	= 	$this -> getParam('column-width', $css);
 		$settings['gutterwidth']	= 	$this -> getParam('gutter-width', $css);
+		$settings['baseline']		=	$this -> getParam('baseline', $css);
 		$settings['keep-settings']	=	$this -> getParam('keep-settings', $css);	/* yes or no */
 		$settings['generate-path']	=	$this -> getParam('generate-path', $css);
 		
@@ -30,20 +31,66 @@ class GridCSS
 		if ($settings['format'] == "") 
 		{
 			$settings['format'] = "newline";
-		}
-		
+		}	
 	}
 	
 	public function generateGrid($css)
 	{
 		global $settings;
 		
-		// It is executing from /css
-		$file = fopen("areas/grid.css", "w") or die("Can't open the file");
+		// Make the .columns classes
+		for ($i=1; $i < $settings['columncount'] + 1; $i++) { 
+			$w = $settings['columnwidth'] * $i - $settings['gutterwidth'];\
+			$s .= "  .columns-$i \t{ width:".$w."px; }\n";
+		}
 		
-		fwrite($file, "This is a test");
+		// Add an extra line to clean it up
+		$s .= "\n";
 		
+		// Make the .push classes
+		for ($i=1; $i < $settings['columncount']; $i++) { 
+			$w = $settings['columnwidth'] * $i;
+			$s .= "  .push-$i \t{ margin: 0 -".$w."px 0 ".$w."px; }\n";
+			$pushselectors .= ".push-$i,";
+		}
+		$s .= $pushselectors . "{ float:right; position:relative; }\n\n";
+		
+		// Add an extra line to clean it up
+		$s .= "\n";
+		
+		// Make the .pull classes
+		for ($i=1; $i < $settings['columncount']; $i++) { 
+			$w = $settings['columnwidth'] * $i;
+			$s .= "  .pull-$i \t{ margin-left:-".$w."px; }\n";
+			$pullselectors .= ".pull-$i,";
+		}
+		$s .= $pullselectors . "{ float:left; position:relative; }\n\n";
+		
+		// Open the file relative to /css/
+		$file = fopen("sections/grid.css", "w") or die("Can't open the file");
+		
+		// Write the string to the file
+		fwrite($file, $s);
 		fclose($file);
+	}
+	
+	public function generateGridImage($css)
+	{
+		global $settings;
+		
+		$image = ImageCreate($settings['columnwidth'], $settings['baseline']);
+		
+		$colorWhite		= ImageColorAllocate($image, 255, 255, 255);
+		$colorGrey		= ImageColorAllocate($image, 200, 200, 200);
+		$colorBlue		= ImageColorAllocate($image, 240, 240, 255);
+		
+		Imagefilledrectangle($image, 0, 0, ($settings['columnwidth'] - $settings['gutterwidth']), ($settings['baseline'] - 1), $colorBlue);
+		Imagefilledrectangle($image, ($settings['columnwidth'] - $settings['gutterwidth'] + 1), 0, $settings['columnwidth'], ($settings['baseline'] - 1), $colorWhite);
+	
+		imageline($image, 0, ($settings['baseline'] - 1 ), $settings['columnwidth'], ($settings['baseline'] - 1 ), $colorGrey);
+		
+	    ImagePNG($image,"../images/backgrounds/grid.png");
+	    ImageDestroy($image);
 	}
 	
 	public function buildGrid($css) 
