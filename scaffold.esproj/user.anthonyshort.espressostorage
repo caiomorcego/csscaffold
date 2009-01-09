@@ -5,8 +5,50 @@
 	<key>com.macrabbit.Espresso.FileManager.DisclosureCollapsed</key>
 	<false/>
 	<key>com.macrabbit.Espresso.Publisher.DisclosureCollapsed</key>
-	<false/>
+	<true/>
 	<key>com.macrabbit.Espresso.Workspace.DisclosureCollapsed</key>
 	<false/>
+	<key>com.macrabbit.Espresso.Workspace.Tabs</key>
+	<dict>
+		<key>Tabs</key>
+		<array>
+			<dict>
+				<key>StateType</key>
+				<string>PreviewTab</string>
+				<key>URL</key>
+				<string>http://scaffold/css/demo.css?recache</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/anthonyshort/Sites/%40projects/Scaffold/www/css/demo.css</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/anthonyshort/Sites/%40projects/Scaffold/www/index.html</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/anthonyshort/Sites/%40projects/Scaffold/www/css/snippets/utilities.css</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/anthonyshort/Sites/%40projects/Scaffold/www/css/system/config.php</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/anthonyshort/Sites/%40projects/Scaffold/www/css/system/plugins/-grid.php</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>

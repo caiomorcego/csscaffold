@@ -1,0 +1,51 @@
+// Snippets
+@server import url('snippets/reset.css');
+@server import url('snippets/utilities.css');
+@server import url('snippets/grid.css');
+
+// Typography
+@server import url('sections/typography.css');
+
+@constants {
+	textColor:#222;
+	fontSize:13px;
+	lineHeight:18px; 
+}
+
+@grid {
+	column-width:23;
+	gutter-width:18;
+	column-count:24;
+	keep-settings:no;
+	generate-path:'/css/snippets/';
+	baseline:18;
+}
+
+#page {
+	class:container;
+}
+
+#header, #footer 
+{
+	columns:24!;
+	padding: 20px;
+	border: 1px solid #eee;
+	class:column,wireframe;
+}
+
+#primary-content, #secondary-content, #tertiary-content {
+	class:column,wireframe;
+}
+
+#primary-content {
+	columns:14!;
+}
+
+#secondary-content {
+	columns:5!;
+}
+
+#tertiary-content {
+	columns:5!;
+	class:last;
+}

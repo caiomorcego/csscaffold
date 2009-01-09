@@ -1,0 +1,160 @@
+
+/* -------------------------------------------------------------------- */
+
+/* @group Settings */
+	
+/* -------------------------------------------------------------------- */
+
+	@grid {
+		column-width:23;
+		gutter-width:18;
+		column-count:24;
+		keep-settings:no;
+		format:newline;
+		generate-path:'/css/snippets/'; 
+		baseline:18;
+	}
+	
+	/* These work like settings */
+	@constants {
+		textColor:#222;
+		fontSize:13px;
+		lineHeight:18px;
+	}
+	
+	// Snippets
+	@server import url('snippets/reset.css');
+	@server import url('snippets/utilities.css');
+	@server import url('snippets/grid.css');
+	
+	// Typography
+	@server import url('sections/typography.css');
+	
+	// Forms
+	@server import url('sections/forms.css');
+	
+/* @end */
+		
+		
+		
+		
+/* -------------------------------------------------------------------- */
+
+/* @group Layout */
+	
+/* -------------------------------------------------------------------- */
+
+	#page		 	{ class:container,showgrid; }
+	
+	#header		{ columns:24!; height:108px; class:wireframe; }
+	#footer		{ columns:24!; height:108px; class:wireframe; margin:0; }
+	
+	#primary-content 				{ }
+	#secondary-content			{ }
+	#tertiary-content				{ }
+	
+
+/* @group Layout Types */
+/* ---------------------------------------------------------------- */
+	
+	.layout-1 
+	{
+		#primary-content 			{ columns:18!; padding:8px; border:1px solid #000; height:360px; }
+		#secondary-content		{ columns:6!; height:198px; class:last;}
+		#tertiary-content			{ columns:24!; class:wireframe; }
+	}
+	
+	.layout-2
+	{
+		#primary-content 			{ }
+		#secondary-content		{ }
+		#tertiary-content			{ }
+	}
+
+/* @end */
+/* @group Page Specific */
+/*---------------------------------------------------------------- */	
+	
+	#home					{}
+	#about					{}	
+	#services				{}
+	#contact				{}
+	#search-results		{}	
+
+/* @end */	
+/* @end */
+
+
+
+
+/* @group Navigation *//* -------------------------------------------
+
+	Navigation
+
+--------------------------------------------------------------------*/
+	
+	#navigation			{ margin:0;padding:0; }
+	#navigation li 		{ float:left;padding:0; }
+	#navigation li a 		{ display:block; }
+
+/* @end */
+
+
+
+
+	
+/* @group Common Elements *//* --------------------------------------
+
+	Common Elements
+
+--------------------------------------------------------------------*/
+
+
+
+
+/* @end */
+
+
+
+
+
+/* @group Content  *//* -----------------------------------------------------
+
+	Content Styling
+	
+	Use these styles to form content, like blog posts, with classes.
+
+---------------------------------------------------------------------------*/
+	
+	/*
+	
+	<div class="pic span-4 left .pull-4">
+		<img src="image.jpg" />
+		<p>Caption goes here.</p>
+	</div>
+
+	or
+	
+	<img src="image.jpg" class="pic four left frame solo"/>
+	
+	*/
+	
+	.right 		{ float: right; margin: 1.5em 0 1.5em 1.5em; }
+	.left 			{ float: left; margin: 1.5em 1.5em 1.5em 0; }
+	.solo	 		{ margin-bottom: 1.5em; }
+	
+	.pic p, .caption {
+		font-size: 11px;
+		line-height: 15px;
+		color: #666;
+		margin: 4px 0 10px;
+	}
+	
+	.frame 		{ border: 1px solid #999; }
+	
+
+
+/* @end */
+		
+
+	
