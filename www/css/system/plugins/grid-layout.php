@@ -33,6 +33,9 @@ class Grid extends CacheerPlugin
 		// Create a new GridCSS object and put the css into it
 		$grid = new GridCSS($css);
 		
+		// Create the layouts xml for use with the tests
+		$grid -> generateLayoutXML($css);
+		
 		//$css = $this -> math($css);
 		$css = $grid -> replaceColumns($css);
 		

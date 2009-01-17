@@ -48,6 +48,7 @@ if
 include($system_dir."/plugin.php");
 $flags = array();
 $plugins = array();
+//$plugin_class_array = array();
 $plugin_path = $system_dir."/plugins";
 
 if (is_dir($plugin_path))
@@ -60,21 +61,27 @@ if (is_dir($plugin_path))
 			{ 
 				continue; 
 			}
+			
 			include($plugin_path.'/'.$plugin_file);
-			if (isset($plugin_class) && class_exists($plugin_class))
-			{
-				$plugins[$plugin_class] = new $plugin_class($flags);
-				$flags = array_merge($flags, $plugins[$plugin_class]->flags);
-			}
-		}
+			
+			//array_push($plugin_class_array, $plugin_class);
+					
+		}			
 		closedir($dir_handle);
 	}
 }
 
-// Anthony: Added this to control the plugin order.
-$plugins = pluginOrder($plugins);
+// Now execute the plugins
+foreach($plugin_order as $plugin_class)
+{
+	// The the class exists
+	if (class_exists($plugin_class))
+	{
+		$plugins[$plugin_class] = new $plugin_class($flags);
+		$flags = array_merge($flags, $plugins[$plugin_class]->flags);
+	}
+}
 
-//print_r($plugins);exit;
 
 /******************************************************************************
  Create hash of query string to allow variables to be cached

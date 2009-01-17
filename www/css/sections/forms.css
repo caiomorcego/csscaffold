@@ -1,8 +1,8 @@
-/* @group Forms Framework *//* --------------------------------
+/* -------------------------------------------------------------------- */
 
-	Forms Framework
-
--------------------------------------------------------------*/
+/* @group Forms */
+	
+/* -------------------------------------------------------------------- */
 
 	label,p.label    { font-weight: bold; margin: 0; }
 	fieldset    		{ padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
@@ -21,7 +21,7 @@
 	}
 
 
-	/* @group -Form Fields *//*
+	/* @group Form Fields *//*
 	-------------------------------------------------------------- */
 	
 	.text,
@@ -39,7 +39,6 @@
 		border:1px solid #eee;
 		margin:0 0 10px 0;
 		padding: 15px;
-		width:100%;
 	}
 	
 	/* On Focus */
@@ -78,7 +77,7 @@
 
 	/* @end */
 	
-	/* @group -Form Layout */
+	/* @group Form Layout */
 	fieldset.inline label, 
 	fieldset.inline p.label { float:left; }
 	
@@ -91,7 +90,7 @@
 	/* @end */
 	
 	
-	/* @group -notices */
+	/* @group Notices */
 	/* Success, notice and error boxes
 	-------------------------------------------------------------- */
 	

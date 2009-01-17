@@ -1,35 +1,25 @@
-/* @group Typography *//* -------------------------------------
+/* -------------------------------------------------------------------- */
 
-	Typography
-
--------------------------------------------------------------*/
+/* @group Typography */
+	
+/* -------------------------------------------------------------------- */
 
 
 	body 
 	{ 
-	  font: const(fontSize)/const(lineHeight) Helvetica, Arial, sans-serif;
+	  font: const(fontSize)/grid(baseline) Helvetica, Arial, sans-serif;
 	  background: #fff; 
 	  color: const(textColor);
 	}
 	
-	/*
-	Coming soon... :)
-	
-	@font-face {
-	  font-family: "other";
-	  src: url("otherfont.ttf");
-	}
-	*/
 	
 	/* @group Headings */
 	/*	-------------------------------------------------------------- */
 	
 	
-	h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
-	
 	h1 { 
-		font: 3em/1 "Helvetica Neue", Helvetica, Arial, sans-serif;  
-		margin-bottom: math(grid(baseline)/2);  
+		font: 3em/math(grid(baseline)*3)px "Helvetica Neue", Helvetica, Arial, sans-serif;
+		margin-bottom: math(grid(baseline))px;  
 	}
 	
 	h2 {
@@ -43,17 +33,17 @@
 	}
 	
 	h4 { 
-		font: 1.2em/1.25 "Helvetica Neue", Helvetica, Arial, sans-serif; 
-		margin-bottom: math(grid(baseline)*1.25)px; 
+		font: 1.2em/grid(baseline) "Helvetica Neue", Helvetica, Arial, sans-serif; 
+		margin-bottom: grid(baseline); 
 	}
 	
 	h5 { 
-		font: bold 1em/1 "Helvetica Neue", Helvetica, Arial, sans-serif;  
-		margin-bottom: math(grid(baseline)*1.5)px; 
+		font: bold 1em/grid(baseline) "Helvetica Neue", Helvetica, Arial, sans-serif;  
+		margin-bottom: grid(baseline); 
 	}
 	
 	h6 { 
-		font: bold 1em/1 "Helvetica Neue", Helvetica, Arial, sans-serif; 
+		font: bold 1em/grid(baseline) "Helvetica Neue", Helvetica, Arial, sans-serif; 
 	}
 	
 	h1 img, h2 img, h3 img, 
@@ -61,23 +51,24 @@
 	  margin: 0;
 	}
 	
+	h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+	
 	/* @end */
 	
 	
 	/* @group Text elements */
 	/* 	-------------------------------------------------------------- */
 	
-	p				{ margin: 0; }
-	p + p			{ margin: 1.5em 0 0 0;}
-	.ie6 p			{ margin-bottom: 1.5em; }
+	p				{ margin: 0 0 grid(baseline) 0; }
+	p:last-child	{ margin-bottom:0;}
 	
-	blockquote  	{ margin: 1.5em; font-style: italic; color: #666; }
+	blockquote  	{ margin: grid(baseline); font-style: italic; color: #666; }
 	
 	strong      	{ font-weight: bold; }
 	em      	  	{ font-style: italic; }
 	
-	pre,code    	{ margin: 1.5em 0; white-space: pre; }
-	pre,code,tt 	{ font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
+	pre,code    	{ margin: grid(baseline) 0; white-space: pre; }
+	pre,code,tt 	{ font: 11px 'andale mono', 'lucida console', monospace; line-height: grid(baseline); }
 	
 	dfn         	{ font-weight: bold; font-style: italic;  }
 	del         	{ color:#666; }
@@ -85,9 +76,9 @@
 	sup, sub    	{ line-height: 0; }
 	abbr, 
 	acronym     	{ border-bottom: 1px dotted; border-color:#666; }
-	address     	{ margin: 0 0 1.5em; font-style: italic; }
+	address     	{ margin: 0 0 grid(baseline); font-style: italic; }
 	
-	hr 				{ clear: both; float: none; width: 100%; height: 1px; margin: 18px 0; border: none; background:#ddd; }
+	hr 				{ clear: both; float: none; width: 100%; height: 1px; margin: grid(baseline) 0; border: none; background:#ddd; }
 	
 	
 	/* @end */
@@ -108,7 +99,7 @@
 	/* @group Figures */
 	/* 	-------------------------------------------------------------- */
 	
-	p img       	{ float: left; margin: 1.5em 1.5em 1.5em 0; padding: 0; }
+	p img       	{ float: left; margin: grid(baseline) grid(baseline) grid(baseline) 0; padding: 0; }
 	
 	/* @end */
 	
@@ -118,15 +109,15 @@
 	/* 	-------------------------------------------------------------- */
 	
 	li ul, 
-	li ol       { margin:0 1.5em; }
-	ul, ol      { margin: 0 1.5em grid(baseline) 1.5em; }
+	li ol       { margin:0 grid(baseline); }
+	ul, ol      { margin: 0 grid(baseline) grid(baseline) grid(baseline); }
 	
 	ul          { list-style-type: disc; }
 	ol          { list-style-type: decimal; }
 	
-	dl          { margin: 0 0 1.5em 0; }
+	dl          { margin: 0 0 grid(baseline) 0; }
 	dl dt       { font-weight: bold; }
-	dd          { margin-left: 1.5em;}
+	dd          { margin-left: grid(baseline);}
 	/* @end */
 	
 	
@@ -136,7 +127,7 @@
 		Note: Tables still need 'cellspacing="0"' in the markup.
 	-------------------------------------------------------------- */
 	
-	table       { margin-bottom: 1.4em; width:100%; }
+	table       { margin-bottom: grid(baseline); width:100%; }
 	th          { font-weight: bold; background: #C3D9FF; }
 	th,td       { padding: 4px 10px 4px 5px; }
 	tr.alt td   { background: #E5ECF9; }
@@ -144,6 +135,23 @@
 	caption     { background: #eee; }
 	
 	/* @end */	
+	
+	
+	/* @group General Classes */
+	/* -------------------------------------------------------------- */
+	
+	.small      { font-size: 11px; margin-bottom: grid(baseline); line-height: 15px; } // Incremental Leading
+	.large      { font-size: 2.2em; line-height: math(grid(baseline) * 2)px; margin-bottom: grid(baseline); letter-spacing: -1px; }
+	.hide       { display: none; }
+
+	.quiet      { color: #666; }
+	.loud       { color: #000; }
+	.highlight  { background:#ff0; }
+	.added      { background:#060; color: #fff; }
+	.removed    { background:#900; color: #fff; }
+
+
+	/* @end */
 	
 	
 /* @end */

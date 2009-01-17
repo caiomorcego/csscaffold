@@ -7,13 +7,19 @@ class GridCSS
 		global $settings;
 
 		// Get the parameters from @grid
-		$settings['format']			= 	$this -> getParam('format', $css);			/* newline or inline */
+		
+		//$settings['format']			= 	$this -> getParam('format', $css);			/* newline or inline */
+		$settings['format']			= "inline";
+		
 		$settings['columncount'] 	= 	$this -> getParam('column-count', $css);
 		$settings['columnwidth']	= 	$this -> getParam('column-width', $css);
 		$settings['gutterwidth']	= 	$this -> getParam('gutter-width', $css);
 		$settings['baseline']		=	$this -> getParam('baseline', $css);
-		$settings['keep-settings']	=	$this -> getParam('keep-settings', $css);	/* yes or no */
-		$settings['generate-path']	=	$this -> getParam('generate-path', $css);
+		
+		//$settings['keep-settings']	=	$this -> getParam('keep-settings', $css);	/* yes or no */
+		$settings['keep-settings']	= "no";
+		
+		//$settings['generate-path']	=	$this -> getParam('generate-path', $css); MAKE SURE IT HAS A GENERATE PATH
 		
 		// Check whether we should use the column width or calculate it from the grid width
 		if ($settings['columnwidth'] == "") 
@@ -38,8 +44,9 @@ class GridCSS
 	public function generateGrid($css)
 	{
 		global $settings;
+		global $generated_dir;
 		
-		// Make the .columns classes
+		// Make the .columns-x classes
 		for ($i=1; $i < $settings['columncount'] + 1; $i++) { 
 			$w = $settings['columnwidth'] * $i - $settings['gutterwidth'];\
 			$s .= "  .columns-$i \t{ width:".$w."px; }\n";
@@ -51,7 +58,7 @@ class GridCSS
 		// Make the .push classes
 		for ($i=1; $i < $settings['columncount']; $i++) { 
 			$w = $settings['columnwidth'] * $i;
-			$s .= "  .push-$i \t{ margin: 0 -".$w."px 0 ".$w."px; }\n";
+			$s .= "  .push-$i \t{ margin-right: -".$w."px; }\n";
 			$pushselectors .= ".push-$i,";
 		}
 		$s .= $pushselectors . "{ float:right; position:relative; }\n\n";
@@ -67,8 +74,26 @@ class GridCSS
 		}
 		$s .= $pullselectors . "{ float:left; position:relative; }\n\n";
 		
+		// Make the .baseline-x classes
+		for ($i=1; $i < 51; $i++) { 
+			$h = $settings['baseline'] * $i;
+			$s .= "  .baseline-$i \t{ height:".$h."px; }\n";
+		}
+		
+		// Make the .baseline-pull-x class
+		for ($i=1; $i < 51; $i++) { 
+			$h = $settings['baseline'] * $i;
+			$s .= "  .baseline-pull-$i \t{ margin-top:-".$h."px; }\n";
+		}
+		
+		// Make the .baseline-push-x classes
+		for ($i=1; $i < 51; $i++) { 
+			$h = $settings['baseline'] * $i;
+			$s .= "  .baseline-push-$i \t{ margin-bottom:-".$h."px; }\n";
+		}
+		
 		// Open the file relative to /css/
-		$file = fopen($_SERVER['DOCUMENT_ROOT']."/".$settings['generate-path']."/grid.css", "w") or die("Can't open the file");
+		$file = fopen($generated_dir."/grid.css", "w") or die("Can't open the file");
 		
 		// Write the string to the file
 		chmod($file, 777);
@@ -91,8 +116,43 @@ class GridCSS
 	
 		imageline($image, 0, ($settings['baseline'] - 1 ), $settings['columnwidth'], ($settings['baseline'] - 1 ), $colorGrey);
 		
-	    ImagePNG($image,"../../css/images/backgrounds/grid.png");
+	    ImagePNG($image,"../css/images/backgrounds/grid.png") or die("Can't save the file");
 	    ImageDestroy($image);
+	}
+	
+	public function generateLayoutXML($css)
+	{
+		global $settings;
+		
+		$list = "<layouts>\n";
+		$layoutnames = array();
+
+		if(preg_match_all('/\.layout\-(\w*)/',$css,$matches))
+		{
+			foreach($matches[1] as $match)
+			{
+				array_push($layoutnames, $match);
+			}					
+		}
+		
+		$layouts = array_unique($layoutnames);
+		
+		foreach($layouts as $layout)
+		{
+			$node = "<layout>".$layout."</layout>\n";
+			$list .= $node;
+		}
+		
+		$list .= "\n</layouts>";
+		
+		// Open the file
+		$file = fopen("system/tests/xml/layouts.xml", "w") or die("Can't open the file");
+		
+		// Write the string to the file
+		chmod($file, 777);
+		fwrite($file, $list);
+		fclose($file);
+		
 	}
 	
 	public function buildGrid($css) 
@@ -305,15 +365,10 @@ class GridCSS
 		
 		// Replace grid(xcol)
 		
-		if (preg_match_all('/grid\((.+?)col\)/', $css, $matches))
+		if (preg_match_all('/grid\((\d+)?col\)/', $css, $matches))
 		{
 			foreach ($matches[1] as $key => $number)
 			{
-				if($number=="max") 
-				{
-					$number = $settings['columncount'];
-				} 
-				
 				$colw = ($number * $settings['columnwidth']) - $settings['gutterwidth'] .'px';
 				
 				if($settings['keep-settings'] == "yes"){
@@ -323,6 +378,10 @@ class GridCSS
 				$css = str_replace($matches[0][$key],$colw,$css);
 			}
 		}
+		
+		// Replace grid(max)
+		$maxw = ($settings['columncount'] * $settings['columnwidth']) - $settings['gutterwidth'] .'px';
+		$css = str_replace('grid(max)',$maxw,$css);
 		
 		// Replace grid(baseline)
 		

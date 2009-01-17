@@ -4,6 +4,6 @@
 <IfModule mod_rewrite.c> 
 	RewriteEngine	on
 	RewriteCond		%{REQUEST_FILENAME}		-f
-	RewriteCond 	%{REQUEST_URI}		\.css$
+	RewriteCond 	%{REQUEST_URI}	[^tests/|system/]\.css$
 	RewriteRule 	^(.+)$ 				system/css-cacheer.php?cssc_request=%{REQUEST_URI}&%{QUERY_STRING}
 </IfModule>

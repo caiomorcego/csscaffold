@@ -15,19 +15,20 @@ class NestedSelectorsPlugin extends CacheerPlugin
 		 ******************************************************************************/
 		// Transform the CSS into XML
 		// does not like the data: protocol
+		
 		$xml = trim($css);
 		$xml = preg_replace('#(/\*[^*]*\*+([^/*][^*]*\*+)*/)#', '', $xml); // Strip comments to prevent parsing errors
 		$xml = str_replace('"', '#SI-CSSC-QUOTE#', $xml);
-		$xml = preg_replace('/([-a-z]+)\s*:\s*([^;}{]+)(?:;)/ie', "'<property name=\"'.trim('$1').'\" value=\"'.trim('$2').'\" />'", $xml); // Transform properties
+		$xml = preg_replace('/([-a-z]+)\s*:\s*([^;}{]+)(?:;)/ie', "'<property name=\"'.trim('$1').'\" value=\"'.trim('$2').'\" />'", $xml); // Transform properties		
 		$xml = preg_replace('/^(\s*)([\+>#*@:.a-z][^{]+)\{/me', "'$1<rule selector=\"'.preg_replace('/\s+/', ' ', trim(str_replace('>','&gt;','$2'))).'\">'", $xml); // Transform selectors
 		$xml = str_replace('}', '</rule>', $xml); // Close rules
 		$xml = preg_replace('/\n/', "\r\t", $xml); // Indent everything one tab
 		$xml = '<?xml version="1.0" ?'.">\r<css>\r\t$xml\r</css>\r"; // Tie it all up with a bow
 
-		// header('Content-type: text/text');
-		// echo $xml;
-		// exit();
-
+		//header('Content-type: text/text');
+		//echo $xml;
+		//exit();
+		
 		/******************************************************************************
 		 Parse the XML into a crawlable DOM
 		 ******************************************************************************/

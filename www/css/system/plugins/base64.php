@@ -30,6 +30,7 @@ class Base64Plugin extends CacheerPlugin
 		if (isset($this->flags['Base64']))
 		{
 			global $requested_dir;
+			
 			$root_dir = $_SERVER['DOCUMENT_ROOT'];
 
 			$images = array();
@@ -37,7 +38,7 @@ class Base64Plugin extends CacheerPlugin
 			{
 				foreach($matches[1] as $relative_img)
 				{
-					if (!preg_match('#\.(gif|jpg|png)$#', $relative_img, $ext))
+					if (!preg_match('#\.(gif|jpg|png)#', $relative_img, $ext))
 					{
 						continue;
 					}
@@ -48,7 +49,8 @@ class Base64Plugin extends CacheerPlugin
 				foreach($images as $relative_img => $img_ext)
 				{
 					$up = substr_count($relative_img, '../');
-					$absolute_img = $root_dir.preg_replace('#([^/]+/){'.$up.'}(\.\./){'.$up.'}#', '', $requested_dir.'/'.$relative_img);
+					$relative_img_loc = preg_replace('/[\'|\"]/', "",$relative_img);
+					$absolute_img = $root_dir.preg_replace('#([^/]+/){'.$up.'}(\.\./){'.$up.'}#', '', $requested_dir.'/'.$relative_img_loc);
 
 					if (file_exists($absolute_img))
 					{
